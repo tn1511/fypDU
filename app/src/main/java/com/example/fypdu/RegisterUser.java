@@ -54,6 +54,7 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tagline:
+            case R.id.appName:
                 startActivity(new Intent(this, MainActivity.class));
                 break;
             case R.id.registerBtn:
@@ -116,16 +117,16 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                     .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
-                                                Toast.makeText(RegisterUser.this, "User has been successfully added", Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
-
-                                                //redirect to login
-                                            }else{
+                                            if (!task.isSuccessful()) {
 
                                                 Toast.makeText(RegisterUser.this, "User has been failed to be added", Toast.LENGTH_LONG).show();
-                                                progressBar.setVisibility(View.GONE);
+                                            } else {
+                                                Toast.makeText(RegisterUser.this, "User has been successfully added", Toast.LENGTH_LONG).show();
+                                                    // TODO make toast messages work
+                                                //redirect to login
                                             }
+                                            progressBar.setVisibility(View.GONE);
+
                                         }
                                     });
                         }
