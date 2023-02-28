@@ -125,7 +125,9 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
                                                     // TODO make toast messages work
                                                 //redirect to login
                                             }
+
                                             progressBar.setVisibility(View.GONE);
+                                            startActivity(new Intent(RegisterUser.this, MainActivity.class));
 
                                         }
                                     });
