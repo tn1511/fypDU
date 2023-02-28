@@ -31,7 +31,10 @@
         android:textStyle="italic"
         app:layout_constraintTop_toBottomOf="@+id/appName"
         tools:layout_editor_absoluteX="116dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
 
     <EditText
         android:id="@+id/email"
@@ -86,7 +89,7 @@
         android:layout_marginLeft="30dp"/>
 
     <TextView
-        android:id="@+id/Register"
+        android:id="@+id/register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Register"
