@@ -1,5 +1,8 @@
 package com.example.fypdu;
 
+import static android.app.ProgressDialog.show;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,8 +13,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterUser extends AppCompatActivity implements View.OnClickListener {
 
@@ -60,6 +68,8 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
         String name = editTextName.getText().toString().trim();
         String age = editTextAge.getText().toString().trim();
 
+
+        //authentication
         if (name.isEmpty()){
             editTextName.setError("Full Name is required");
             editTextName.requestFocus();
@@ -91,8 +101,41 @@ public class RegisterUser extends AppCompatActivity implements View.OnClickListe
             editTextPassword.setError("Password longer than 5 characters is required");
             editTextPassword.requestFocus();
             return;
-
         }
+
+      progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            user user = new user(name, age, email);
+
+                            FirebaseDatabase.getInstance().getReference("users")
+                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                    .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                Toast.makeText(RegisterUser.this, "User has been successfully added", Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility(View.GONE);
+
+                                                //redirect to login
+                                            }else{
+
+                                                Toast.makeText(RegisterUser.this, "User has been failed to be added", Toast.LENGTH_LONG).show();
+                                                progressBar.setVisibility(View.GONE);
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
+
+
+
+
+
 
     }
 }
