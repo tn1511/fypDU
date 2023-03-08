@@ -62,7 +62,7 @@ public class resetPassword extends AppCompatActivity {
                 if(task.isSuccessful()){
                     Toast.makeText(resetPassword.this, "Check your email to reset password", Toast.LENGTH_LONG).show();
                 }else {
-                    Toast.makeText(resetPassword.this, "Errot Try again", Toast.LENGTH_LONG).show();
+                    Toast.makeText(resetPassword.this, "Error, Please Try again", Toast.LENGTH_LONG).show();
                 }
             }
         });

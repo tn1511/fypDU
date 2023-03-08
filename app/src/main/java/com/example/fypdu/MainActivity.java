@@ -106,7 +106,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Toast.makeText(MainActivity.this, "Check your email to verify your account", Toast.LENGTH_LONG).show();
                     }*/
 
-                    startActivity(new Intent(MainActivity.this, userProfile.class));
+                    startActivity(new Intent(MainActivity.this, dashboard.class));
 
 
 
