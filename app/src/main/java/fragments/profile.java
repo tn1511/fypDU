@@ -4,11 +4,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.fypdu.R;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +30,11 @@ public class profile extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private FirebaseUser user;
+    private DatabaseReference reference;
+    private String userID;
+
+    private Button logout;
 
     public profile() {
         // Required empty public constructor
@@ -51,6 +61,12 @@ public class profile extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //TODO code goes here
+        Toast errormsg = Toast.makeText(getActivity(), "TESTTTTTTTT!", 5000);
+        errormsg.setGravity(Gravity.CENTER, 0, 0);
+        errormsg.show();
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -62,5 +78,10 @@ public class profile extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false);
+
+
+
+
+
     }
 }
