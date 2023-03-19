@@ -16,8 +16,8 @@ import android.widget.Toast;
 
 import com.example.fypdu.R;
 import com.google.firebase.auth.FirebaseAuth;
-
-
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 
 /**
@@ -39,6 +39,11 @@ public class home extends Fragment{
     private Button createGroup;
 
     private FirebaseAuth mAuth;
+
+    private DatabaseReference mDatabase;
+// ...
+
+
 
     public home() {
         // Required empty public constructor
@@ -83,6 +88,7 @@ public class home extends Fragment{
 
         createGroup=(Button)v.findViewById(R.id.createGroupBtn);
         createGroup.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 createGroup();
@@ -112,7 +118,7 @@ public class home extends Fragment{
 
                 }
                 else{
-                createNewGroup();
+                createNewGroup(groupName);
                 }
 
             }
@@ -129,9 +135,12 @@ public class home extends Fragment{
         builder.show();
     }
 
-    private void createNewGroup() {
+    private void createNewGroup(String groupName) {
 
         //stores new group name in db
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase.child("Groups").child(groupName).setValue("");
+
 
 
     }
