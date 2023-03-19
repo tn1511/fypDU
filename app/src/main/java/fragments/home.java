@@ -4,20 +4,32 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.fypdu.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.stream.*;
 
 
 /**
@@ -41,6 +53,10 @@ public class home extends Fragment{
     private FirebaseAuth mAuth;
 
     private DatabaseReference mDatabase;
+
+    private ListView groupView;
+    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<String> listOfGroups = new ArrayList<>();
 // ...
 
 
@@ -85,7 +101,12 @@ public class home extends Fragment{
         // Inflate the layout for this fragment
         mAuth = FirebaseAuth.getInstance();
 
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("Groups");
 
+
+        groupView = (ListView) v.findViewById(R.id.groupsList);
+        initializeFields();
+        retrieveGroups();
         createGroup=(Button)v.findViewById(R.id.createGroupBtn);
         createGroup.setOnClickListener(new View.OnClickListener() {
 
@@ -101,6 +122,41 @@ public class home extends Fragment{
 
         return v;
     }
+
+    private void retrieveGroups() {
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Set<String> set = new HashSet<>();
+                Iterator iterator = snapshot.getChildren().iterator();
+                while (iterator.hasNext()){
+                    set.add(String.valueOf(((DataSnapshot)iterator.next()).getKey()));
+
+                }
+                listOfGroups.clear();
+                listOfGroups.addAll(set);
+                arrayAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+
+    private void initializeFields() {
+
+        groupView = (ListView) groupView.findViewById(R.id.groupsList);
+        arrayAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_list_item_1, listOfGroups);
+        groupView.setAdapter(arrayAdapter);
+    }
+
+
+
+
+
 
     private void createGroup() {
 
@@ -141,7 +197,7 @@ public class home extends Fragment{
         mDatabase = FirebaseDatabase.getInstance().getReference();
         mDatabase.child("Groups").child(groupName).setValue("");
 
-
+        //TODO add if/else to give toast if task is succsessfull of not
 
     }
 

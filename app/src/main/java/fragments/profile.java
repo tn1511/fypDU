@@ -63,9 +63,7 @@ public class profile extends Fragment {
         super.onCreate(savedInstanceState);
 
         //TODO code goes here
-        Toast errormsg = Toast.makeText(getActivity(), "TESTTTTTTTT!", 5000);
-        errormsg.setGravity(Gravity.CENTER, 0, 0);
-        errormsg.show();
+
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);

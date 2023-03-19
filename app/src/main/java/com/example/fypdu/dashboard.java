@@ -57,17 +57,17 @@ public class dashboard extends AppCompatActivity implements View.OnClickListener
 
 
 
-        replaceFragment(new fragments.home());
+        replaceFragment(new fragments.groups());
 
 
         binding.navBar.setOnItemSelectedListener(item -> {
 
         switch (item.getItemId()){
             case R.id.ic_home:
-                replaceFragment(new fragments.home());
+                replaceFragment(new fragments.groups());
                 break;
             case R.id.ic_group:
-                replaceFragment(new fragments.groups());
+                replaceFragment(new fragments.home());
                 break;
             case R.id.ic_settings:
                 replaceFragment(new fragments.settings());
