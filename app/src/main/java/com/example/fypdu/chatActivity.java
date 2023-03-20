@@ -1,6 +1,7 @@
 package com.example.fypdu;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class chatActivity extends AppCompatActivity {
 
@@ -49,6 +52,42 @@ public class chatActivity extends AppCompatActivity {
         groupChatRef = FirebaseDatabase.getInstance().getReference().child("Groups").child(currentGcName);
 
 
+        onStart();{
+            super.onStart();
+            groupChatRef.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    if(snapshot.exists()){
+                        showMessages(snapshot);
+                    }
+
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    if(snapshot.exists()){
+                        showMessages(snapshot);
+                    }
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+
 
         
         initalizeFields();
@@ -66,6 +105,21 @@ public class chatActivity extends AppCompatActivity {
         });
 
         
+    }
+
+    private void showMessages(DataSnapshot snapshot) {
+        Iterator iterator = snapshot.getChildren().iterator();
+        //gets messages line by line from firebase
+        while (iterator.hasNext()){
+            String chatDate = (String) ((DataSnapshot)iterator.next()).getValue();
+            String chatValue = (String) ((DataSnapshot)iterator.next()).getValue();
+            String chatName = (String) ((DataSnapshot)iterator.next()).getValue();
+            String chatTime = (String) ((DataSnapshot)iterator.next()).getValue();
+
+            displayMessages.append(chatName + ": " + chatValue + "  " + chatTime + "\n\n" );
+
+
+        }
     }
 
     private void saveMessageToDb() {
