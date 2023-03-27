@@ -3,12 +3,128 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="fragments.groups"
-    android:background="#DCEDC1">
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="80sp"
+       android:orientation="vertical"
+       android:padding="5dp"
+       >
+
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="Welcome To DivvyUp"
+           android:textSize="40dp"
+           android:textAlignment="center"
+           android:textStyle="bold"
+           android:textColor="@color/black"
+           android:layout_marginTop="10dp"/>
+
+
+   </LinearLayout>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="125dp"
+                android:orientation="horizontal"
+                android:background="@drawable/incomebg"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Put the users income here..."
+                        android:textSize="30dp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="125dp"
+                android:orientation="horizontal"
+                android:background="@drawable/outcomebg"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Put the users income here..."
+                        android:textSize="30dp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="125dp"
+                android:orientation="horizontal"
+                android:background="@drawable/tipsbg"
+                android:layout_marginTop="30dp"
+                android:padding="5dp"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Put the users income here..."
+                        android:textSize="30dp"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+    </RelativeLayout>
 
 </FrameLayout>

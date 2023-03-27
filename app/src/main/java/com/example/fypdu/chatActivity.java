@@ -116,7 +116,7 @@ public class chatActivity extends AppCompatActivity {
             String chatName = (String) ((DataSnapshot)iterator.next()).getValue();
             String chatTime = (String) ((DataSnapshot)iterator.next()).getValue();
 
-            displayMessages.append(chatName + ": " + chatValue + "  " + chatTime + "\n\n" );
+            displayMessages.append(chatName + ": " + chatValue + "  -  " + chatTime + "\n\n" );
 
 
         }
