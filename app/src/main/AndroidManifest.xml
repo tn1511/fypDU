@@ -12,6 +12,9 @@
         android:theme="@style/Theme.FypDU"
         tools:targetApi="31">
         <activity
+            android:name=".tipsActivity"
+            android:exported="false" />
+        <activity
             android:name=".chatActivity"
             android:exported="false" />
         <activity

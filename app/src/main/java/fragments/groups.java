@@ -1,5 +1,6 @@
 package fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +8,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.fypdu.R;
+import com.example.fypdu.chatActivity;
+import com.example.fypdu.tipsActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +31,8 @@ public class groups extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private TextView hints;
 
     public groups() {
         // Required empty public constructor
@@ -61,6 +69,19 @@ public class groups extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_groups, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_groups, container, false);
+
+        hints = (TextView) v.findViewById(R.id.tipsTxt);
+        hints.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent tipsIntent = new Intent(getContext(), tipsActivity.class);
+                startActivity(tipsIntent);
+            }
+        });
+
+
+        return v;
     }
 }

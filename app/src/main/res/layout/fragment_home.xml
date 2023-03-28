@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="fragments.home"
-    android:background="#0DCEDC">
+    android:background="@drawable/loginbg">
 
    <androidx.constraintlayout.widget.ConstraintLayout
        android:layout_width="match_parent"
